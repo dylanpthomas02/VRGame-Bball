@@ -18,7 +18,7 @@ public class PlayerScript : MonoBehaviour
         {
             if (OVRInput.GetDown(OVRInput.Button.One))
             {
-                transform.position = rackPositions[index++].position;
+                transform.position = rackPositions[index + 1].position;
             }
             else if (OVRInput.GetDown(OVRInput.Button.Two))
             {
