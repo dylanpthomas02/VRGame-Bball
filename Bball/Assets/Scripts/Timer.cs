@@ -8,8 +8,8 @@ using System;
 public class Timer : MonoBehaviour
 {
     public TextMeshProUGUI timerText;
-    public bool isPlaying = false;
 
+    bool isPlaying = false;
     private float startTime = 60;
     private float currentTime;
 

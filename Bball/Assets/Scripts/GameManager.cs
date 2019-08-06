@@ -5,11 +5,13 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    public static GameManager instance;
+    public static GameManager instance = null;
 
     public GameObject StartMenu;
-
     public GameObject PauseMenu;
+    public GameObject CountdownTimer;
+
+    public Animator countdownAnim;
 
     bool gamePaused = false;
 
@@ -17,28 +19,38 @@ public class GameManager : MonoBehaviour
     {
         if (instance == null)
         {
+            Debug.Log("creating GameManager");
             instance = this;
         }
         else
         {
             Destroy(this);
         }
+        CountdownTimer.SetActive(false);
     }
 
     public void StartGame()
     {
         StartMenu.SetActive(false);
-        StartCountdownTimer();
+        StartCoroutine( StartCountdownTimer() );
     }
 
     void Update()
     {
-        if (OVRInput.GetDown(OVRInput.Button.Start))
+        if (OVRInput.GetDown(OVRInput.Button.Three))
         {
+            Debug.Log("Pause");
+            PauseMenu.transform.position = transform.position + new Vector3(0, 0, 5);
+            PauseMenu.transform.rotation = transform.rotation * Quaternion.Euler(0, 180, 0);
             PauseMenu.SetActive(true);
             gamePaused = !gamePaused;
-            Pause(gamePaused);
+            //Pause(gamePaused);
         }
+    }
+
+    public void EndGame()
+    {
+
     }
 
     public void Pause(bool isPaused)
@@ -47,12 +59,15 @@ public class GameManager : MonoBehaviour
         Time.timeScale = result;
     }
 
-    private void StartCountdownTimer()
+    IEnumerator StartCountdownTimer()
     {
+        CountdownTimer.SetActive(true);
+        countdownAnim.Play("Countdown");
 
+        yield return new WaitForSeconds(3);
     }
 
-    void ResetGame()
+    public void ResetGame()
     {
         StartMenu.SetActive(true);
     }

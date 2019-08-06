@@ -11,6 +11,8 @@ public class AddScore : MonoBehaviour
             Ball ball = other.GetComponent<Ball>();
             int score = ball.scoreAmount;
             ScoreManager.instance.AddScore(score);
+
+            FindObjectOfType<AudioManager1>().Play("ScoreSuccess");
         }
     }
 }

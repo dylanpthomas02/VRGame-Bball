@@ -27,7 +27,7 @@ public class ScoreManager : MonoBehaviour
     {
         playerScore = 0;
         popupScore = 0;
-        SetUI();
+        UpdateScoreUI();
     }
 
     public void AddScore(int ballScore)
@@ -36,7 +36,7 @@ public class ScoreManager : MonoBehaviour
         popupScore = ballScore;
         if (popupScore > 0)
         {
-            SetUI();
+            UpdateScoreUI();
         }
     }
 
@@ -44,10 +44,10 @@ public class ScoreManager : MonoBehaviour
     {
         playerScore = 0;
         popupScore = 0;
-        SetUI();
+        UpdateScoreUI();
     }
 
-    void SetUI()
+    void UpdateScoreUI()
     {
         popupText.text = "+" + popupScore.ToString();
         scoreText.text = playerScore.ToString();
