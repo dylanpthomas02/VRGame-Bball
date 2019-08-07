@@ -7,9 +7,11 @@ public class ScoreManager : MonoBehaviour
 {
     public static ScoreManager instance;
 
+    public Transform player;
+
     public TextMeshProUGUI scoreText;
     public TextMeshProUGUI popupText;
-    Animator anim;
+    public Animator anim;
 
     private static int playerScore;
     private int popupScore;
@@ -19,7 +21,7 @@ public class ScoreManager : MonoBehaviour
         if (instance == null)
             instance = this;
         else
-            Destroy(gameObject);
+            Destroy(this);
             return;
     }
 
@@ -49,10 +51,14 @@ public class ScoreManager : MonoBehaviour
 
     void UpdateScoreUI()
     {
+        popupText.transform.LookAt(player);
         popupText.text = "+" + popupScore.ToString();
         scoreText.text = playerScore.ToString();
 
         // TODO: create popup score animation
-        //anim.Play("popup");
+        anim.SetBool("popup", true);
+        new WaitForSeconds(1f);
+        anim.SetBool("popup", false);
+
     }
 }

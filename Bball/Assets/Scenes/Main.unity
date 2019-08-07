@@ -199,6 +199,28 @@ PrefabInstance:
       propertyPath: m_BackGroundColor.b
       value: 0.26415092
       objectReference: {fileID: 0}
+    - target: {fileID: 8299855581478157911, guid: ce816f2e6abb0504092c23ed9b970dfd,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6596485818953011733, guid: ce816f2e6abb0504092c23ed9b970dfd,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4471613377008970, guid: ce816f2e6abb0504092c23ed9b970dfd, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4471613377008970, guid: ce816f2e6abb0504092c23ed9b970dfd, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4471613377008970, guid: ce816f2e6abb0504092c23ed9b970dfd, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 45
+      objectReference: {fileID: 0}
     - target: {fileID: 481164, guid: ce816f2e6abb0504092c23ed9b970dfd, type: 3}
       propertyPath: m_LocalRotation.y
       value: 0
@@ -223,26 +245,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.x
       value: 45
       objectReference: {fileID: 0}
-    - target: {fileID: 4471613377008970, guid: ce816f2e6abb0504092c23ed9b970dfd, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4471613377008970, guid: ce816f2e6abb0504092c23ed9b970dfd, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4471613377008970, guid: ce816f2e6abb0504092c23ed9b970dfd, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 45
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 6596485818953011733, guid: ce816f2e6abb0504092c23ed9b970dfd, type: 3}
+    - {fileID: 8299855581478157911, guid: ce816f2e6abb0504092c23ed9b970dfd, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: ce816f2e6abb0504092c23ed9b970dfd, type: 3}
---- !u!4 &126155517 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 481164, guid: ce816f2e6abb0504092c23ed9b970dfd,
-    type: 3}
-  m_PrefabInstance: {fileID: 126155516}
-  m_PrefabAsset: {fileID: 0}
 --- !u!20 &126155518 stripped
 Camera:
   m_CorrespondingSourceObject: {fileID: 2015248, guid: ce816f2e6abb0504092c23ed9b970dfd,
@@ -267,9 +273,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8f1a9a1d119a5944aacfb87d1ec283a2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rayTransform: {fileID: 126155517}
+  rayTransform: {fileID: 126155524}
   m_Cursor: {fileID: 1558358752}
   joyPadClickButton: 1
+  touchTrigger: 2
   gazeClickKey: 32
   performSphereCastForGazepointer: 0
   useRightStickScroll: 1
@@ -319,6 +326,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 07f3058bd7722734e81b2c637b34c5e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!224 &126155524 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 3892538974485739818, guid: ce816f2e6abb0504092c23ed9b970dfd,
+    type: 3}
+  m_PrefabInstance: {fileID: 126155516}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &749730714
 GameObject:
   m_ObjectHideFlags: 0
@@ -652,6 +665,13 @@ MonoBehaviour:
     loop: 1
     source: {fileID: 0}
     spatialBlend: 0
+  - soundName: ScoreSuccess
+    clip: {fileID: 8300000, guid: c5cb8908e3c245247aeca4a3ab9a1772, type: 3}
+    volume: 0.209
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+    spatialBlend: 1
 --- !u!4 &1110868584
 Transform:
   m_ObjectHideFlags: 0
@@ -921,7 +941,7 @@ MonoBehaviour:
   dimOnHideRequest: 1
   depthScaleMultiplier: 0.03
   matchNormalOnPhysicsColliders: 0
-  rayTransform: {fileID: 126155517}
+  rayTransform: {fileID: 126155524}
 --- !u!114 &1558358753
 MonoBehaviour:
   m_ObjectHideFlags: 0

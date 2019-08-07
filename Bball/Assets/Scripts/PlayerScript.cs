@@ -16,35 +16,41 @@ public class PlayerScript : MonoBehaviour
     {
         if (index == 0)
         {
-            if (OVRInput.GetDown(OVRInput.Button.One))
+            if (OVRInput.GetDown(OVRInput.Button.Three))
             {
-                transform.position = rackPositions[index + 1].position;
+                index++;
+                transform.position = rackPositions[index].position;
             }
-            else if (OVRInput.GetDown(OVRInput.Button.Two))
+            else if (OVRInput.GetDown(OVRInput.Button.Four))
             {
-                transform.position = rackPositions[rackPositions.Length].position;
+                index = rackPositions.Length - 1;
+                transform.position = rackPositions[index].position;
             }
         }
-        if (index > 0 && index < rackPositions.Length)
+        else if (index > 0 && index < rackPositions.Length - 1)
         {
-            if (OVRInput.GetDown(OVRInput.Button.One))
+            if (OVRInput.GetDown(OVRInput.Button.Three))
             {
-                transform.position = rackPositions[index + 1].position;
+                index++;
+                transform.position = rackPositions[index].position;
             }
-            else if (OVRInput.GetDown(OVRInput.Button.Two))
+            else if (OVRInput.GetDown(OVRInput.Button.Four))
             {
-                transform.position = rackPositions[index - 1].position;
+                index--;
+                transform.position = rackPositions[index].position;
             }
         }
         else
         {
-            if (OVRInput.GetDown(OVRInput.Button.One))
+            if (OVRInput.GetDown(OVRInput.Button.Three))
             {
-                transform.position = rackPositions[0].position;
+                index = 0;
+                transform.position = rackPositions[index].position;
             }
-            else if (OVRInput.GetDown(OVRInput.Button.Two))
+            else if (OVRInput.GetDown(OVRInput.Button.Four))
             {
-                transform.position = rackPositions[index - 1].position;
+                index--;
+                transform.position = rackPositions[index].position;
             }
         }
     }
