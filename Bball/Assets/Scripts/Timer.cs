@@ -9,9 +9,9 @@ public class Timer : MonoBehaviour
 {
     public TextMeshProUGUI timerText;
 
-    bool isPlaying = false;
     private float startTime = 60;
-    private float currentTime;
+    private float currentTime = 0;
+    bool isPlaying = false;
 
     void Start()
     {

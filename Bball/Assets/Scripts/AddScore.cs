@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class AddScore : MonoBehaviour
 {
+    //TODO: setup particle system for successful shot
+    public ParticleSystem ps;
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag("Basketball"))
@@ -12,6 +15,7 @@ public class AddScore : MonoBehaviour
             int score = ball.scoreAmount;
             ScoreManager.instance.AddScore(score);
 
+            ps.Play();
             FindObjectOfType<AudioManager1>().Play("ScoreSuccess");
         }
     }

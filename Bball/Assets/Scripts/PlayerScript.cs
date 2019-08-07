@@ -7,51 +7,60 @@ public class PlayerScript : MonoBehaviour
     public Transform[] rackPositions;
     int index = 0;
 
+    public OVRInput.Button up = OVRInput.Button.Three;
+    public OVRInput.Button down = OVRInput.Button.Four;
+
     void Start()
     {
-        transform.position = rackPositions[0].position;
+        SetPosAndRot();
     }
 
     void Update()
     {
         if (index == 0)
         {
-            if (OVRInput.GetDown(OVRInput.Button.Three))
+            if (OVRInput.GetDown(up))
             {
                 index++;
-                transform.position = rackPositions[index].position;
+                SetPosAndRot();
             }
-            else if (OVRInput.GetDown(OVRInput.Button.Four))
+            else if (OVRInput.GetDown(down))
             {
                 index = rackPositions.Length - 1;
-                transform.position = rackPositions[index].position;
+                SetPosAndRot();
             }
         }
         else if (index > 0 && index < rackPositions.Length - 1)
         {
-            if (OVRInput.GetDown(OVRInput.Button.Three))
+            if (OVRInput.GetDown(up))
             {
                 index++;
-                transform.position = rackPositions[index].position;
+                SetPosAndRot();
             }
-            else if (OVRInput.GetDown(OVRInput.Button.Four))
+            else if (OVRInput.GetDown(down))
             {
                 index--;
-                transform.position = rackPositions[index].position;
+                SetPosAndRot();
             }
         }
         else
         {
-            if (OVRInput.GetDown(OVRInput.Button.Three))
+            if (OVRInput.GetDown(up))
             {
                 index = 0;
-                transform.position = rackPositions[index].position;
+                SetPosAndRot();
             }
-            else if (OVRInput.GetDown(OVRInput.Button.Four))
+            else if (OVRInput.GetDown(down))
             {
                 index--;
-                transform.position = rackPositions[index].position;
+                SetPosAndRot();
             }
         }
+    }
+
+    private void SetPosAndRot()
+    {
+        transform.position = rackPositions[index].position;
+        transform.rotation = rackPositions[index].rotation;
     }
 }
