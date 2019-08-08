@@ -13,7 +13,7 @@ public class ScoreManager : MonoBehaviour
     public TextMeshProUGUI popupText;
     public Animator anim;
 
-    private static int playerScore;
+    public static int playerScore;
     private int popupScore;
 
     private void Awake()

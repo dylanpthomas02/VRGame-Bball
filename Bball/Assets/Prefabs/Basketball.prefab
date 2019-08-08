@@ -123,8 +123,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ffe6c14f054b624d8a61df503f21c73, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_targetedCrosshair: {fileID: 5363766171763797582}
-  m_enabledCrosshair: {fileID: 1571242288203424448}
+  m_targetedCrosshair: {fileID: 1571242288203424448}
+  m_enabledCrosshair: {fileID: 5363766171763797582}
 --- !u!1 &5363766171763797582
 GameObject:
   m_ObjectHideFlags: 0

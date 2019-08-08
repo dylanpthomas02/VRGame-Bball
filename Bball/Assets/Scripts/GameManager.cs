@@ -1,6 +1,8 @@
-﻿using System;
+﻿using OculusSampleFramework;
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -8,44 +10,19 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager instance = null;
 
+    public GameObject player;
     public GameObject StartMenu;
     public GameObject PauseMenu;
+    public GameObject GameCompleteMenu;
+
+    public int balls = 0;
 
     public Animator countdownAnim;
 
     private float m_StartDelay;
     private WaitForSeconds m_StartWait;
-
+    List<Ball> ballList;
     bool gamePaused = false;
-
-    private void Start()
-    {
-        m_StartWait = new WaitForSeconds(m_StartDelay);
-
-        StartCoroutine(GameLoop());
-    }
-
-    private IEnumerator GameLoop()
-    {
-        yield return StartCoroutine(RoundStarting());
-        yield return StartCoroutine(RoundPlaying());
-        yield return StartCoroutine(RoundEnding());
-    }
-
-    private IEnumerator RoundStarting()
-    {
-        yield return m_StartWait;
-    }
-
-    private IEnumerator RoundPlaying()
-    {
-        yield return null;
-    }
-
-    private IEnumerator RoundEnding()
-    {
-        yield return null;
-    }
 
     void Awake()
     {
@@ -59,28 +36,96 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void StartGame()
+    private void Start()
     {
-        StartMenu.SetActive(false);
-        StartCoroutine( StartCountdownTimer() );
+        m_StartWait = new WaitForSeconds(m_StartDelay);
+
+        ballList = new List<Ball>();
+        ballList = GetAllBasketballsInScene();
+        balls = ballList.Count;
+        TurnOffBasketballControl();
+
+        StartCoroutine(GameLoop());
+    }
+
+    void TurnOffBasketballControl()
+    {
+        foreach (Ball ball in ballList)
+        {
+            GetComponentInChildren<DistanceGrabber>().enabled = false;
+        }
     }
 
     void Update()
     {
         if (OVRInput.GetDown(OVRInput.Button.Start))
         {
-            Debug.Log("Pause");
-            PauseMenu.transform.position = transform.position + new Vector3(0, 0, 5);
-            PauseMenu.transform.rotation = transform.rotation * Quaternion.Euler(0, 180, 0);
+            PauseMenu.transform.position = player.transform.position + new Vector3(0, 0, 5);
+            PauseMenu.transform.rotation = player.transform.rotation * Quaternion.Euler(0, 180, 0);
             PauseMenu.SetActive(true);
             gamePaused = !gamePaused;
             Pause(gamePaused);
         }
     }
 
-    public void EndGame()
+    private IEnumerator GameLoop()
     {
+        yield return StartCoroutine(RoundStarting());
+        yield return StartCoroutine(RoundPlaying());
+        yield return StartCoroutine(RoundEnding());
 
+        //if (Timer.currentTime <= 0)
+        //{
+        //    GameCompleteMenu.SetActive(true);
+        //}
+        //else
+        //{
+        //    StartCoroutine(GameLoop());
+        //}
+    }
+
+    private IEnumerator RoundStarting()
+    {
+        StartMenu.SetActive(false);
+
+        yield return m_StartWait;
+
+        foreach (Ball ball in ballList)
+        {
+            GetComponentInChildren<DistanceGrabber>().enabled = true;
+        }
+    }
+
+    private IEnumerator RoundPlaying()
+    {
+        Timer.instance.isPlaying = true;
+
+        while (balls > 0 && Timer.instance.currentTime > 0)
+        {
+            yield return null;
+        }
+    }
+
+    private IEnumerator RoundEnding()
+    {
+        foreach (Ball ball in ballList)
+        {
+            GetComponentInChildren<DistanceGrabber>().enabled = false;
+        }
+
+        yield return null;
+    }
+
+    public List<Ball> GetAllBasketballsInScene()
+    {
+        List<Ball> ballsInScene = new List<Ball>();
+
+        foreach (Ball ball in Resources.FindObjectsOfTypeAll(typeof(Ball)) as Ball[])
+        {
+            ballsInScene.Add(ball);
+        }
+
+        return ballsInScene;
     }
 
     public void Pause(bool isPaused)
@@ -89,15 +134,9 @@ public class GameManager : MonoBehaviour
         Time.timeScale = result;
     }
 
-    IEnumerator StartCountdownTimer()
-    {
-        countdownAnim.Play("Countdown");
-
-        yield return new WaitForSeconds(3);
-    }
-
     public void ResetGame()
     {
-        SceneManager.LoadSceneAsync(SceneManager.GetActiveScene().buildIndex);
+        Timer.instance.ResetTimer();
+        ScoreManager.instance.ResetScore();
     }
 }

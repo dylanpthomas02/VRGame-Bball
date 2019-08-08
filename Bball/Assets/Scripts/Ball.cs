@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using OculusSampleFramework;
+using UnityEngine;
 
 public class Ball : MonoBehaviour
 {

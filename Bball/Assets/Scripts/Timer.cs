@@ -7,11 +7,13 @@ using System;
 
 public class Timer : MonoBehaviour
 {
+    public static Timer instance;
+
     public TextMeshProUGUI timerText;
     [SerializeField]
     private float startTime = 60;
-    private float currentTime = 0;
-    bool isPlaying = false;
+    public float currentTime = 0;
+    public bool isPlaying = false;
 
     void Start()
     {
