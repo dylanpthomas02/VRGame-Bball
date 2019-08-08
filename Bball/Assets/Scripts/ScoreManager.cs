@@ -51,14 +51,13 @@ public class ScoreManager : MonoBehaviour
 
     void UpdateScoreUI()
     {
-        popupText.transform.LookAt(player);
         popupText.text = "+" + popupScore.ToString();
         scoreText.text = playerScore.ToString();
 
         // TODO: create popup score animation
-        anim.SetBool("popup", true);
-        new WaitForSeconds(1f);
-        anim.SetBool("popup", false);
+        anim.SetTrigger("popup");
+        //new WaitForSeconds(1f);
+        //anim.SetBool("popup", false);
 
     }
 }

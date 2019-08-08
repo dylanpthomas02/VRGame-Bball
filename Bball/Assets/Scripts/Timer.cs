@@ -8,7 +8,7 @@ using System;
 public class Timer : MonoBehaviour
 {
     public TextMeshProUGUI timerText;
-
+    [SerializeField]
     private float startTime = 60;
     private float currentTime = 0;
     bool isPlaying = false;
@@ -50,6 +50,6 @@ public class Timer : MonoBehaviour
 
     public void SetUI()
     {
-        timerText.text = currentTime.ToString("F1");
+        timerText.text = currentTime.ToString("F0");
     }
 }
