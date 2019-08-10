@@ -15,6 +15,18 @@ public class Timer : MonoBehaviour
     public float currentTime = 0;
     public bool isPlaying = false;
 
+    private void Awake()
+    {
+        if (instance == null)
+        {
+            instance = this;
+        }
+        else
+        {
+            Destroy(this);
+        }
+    }
+
     void Start()
     {
         currentTime = startTime;
@@ -23,6 +35,11 @@ public class Timer : MonoBehaviour
 
     void Update()
     {
+        TimerCountdown();
+    }
+
+    private void TimerCountdown()
+    {
         if (currentTime > 0 && isPlaying)
         {
             currentTime -= Time.deltaTime;
@@ -30,18 +47,8 @@ public class Timer : MonoBehaviour
         }
         else
         {
-            StopTimer();
+            isPlaying = false;
         }
-    }
-
-    public void StartTimer()
-    {
-        isPlaying = true;
-    }
-
-    private void StopTimer()
-    {
-        isPlaying = false;
     }
 
     public void ResetTimer()
