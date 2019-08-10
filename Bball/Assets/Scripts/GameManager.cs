@@ -73,6 +73,7 @@ public class GameManager : MonoBehaviour
 
     void DisableHandControl()
     {
+        // Good way to disable grab functionality.
         lController.GetComponent<DistanceGrabber>().grabBegin = 1.1f;
         rController.GetComponent<DistanceGrabber>().grabBegin = 1.1f;
     }
