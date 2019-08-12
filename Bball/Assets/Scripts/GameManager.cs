@@ -88,8 +88,7 @@ public class GameManager : MonoBehaviour
     {
         if (OVRInput.GetDown(OVRInput.Button.Start))
         {
-            PauseMenu.transform.position = player.transform.position + new Vector3(0, 0, 10);
-            PauseMenu.transform.rotation = player.transform.rotation;
+            PauseMenu.transform.position = player.transform.position + new Vector3(0, 0, 2);
             gamePaused = !gamePaused;
             PauseMenu.SetActive(gamePaused);
             Pause(gamePaused);
