@@ -88,7 +88,8 @@ public class GameManager : MonoBehaviour
     {
         if (OVRInput.GetDown(OVRInput.Button.Start))
         {
-            PauseMenu.transform.position = player.transform.position + new Vector3(0, 0, 2);
+            PauseMenu.transform.position = player.transform.position + new Vector3(2, 1.5f, 0);
+            PauseMenu.transform.rotation = player.transform.rotation;
             gamePaused = !gamePaused;
             PauseMenu.SetActive(gamePaused);
             Pause(gamePaused);
@@ -142,6 +143,7 @@ public class GameManager : MonoBehaviour
         Timer.instance.isPlaying = false;
 
         messageText.text = "Game Over!";
+        ScoreManager.instance.FinalScore();
         GameCompleteMenu.SetActive(true);
         FindObjectOfType<AudioManager1>().Play("GameEnd");
 

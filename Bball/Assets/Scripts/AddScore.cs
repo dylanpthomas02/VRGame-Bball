@@ -17,7 +17,6 @@ public class AddScore : MonoBehaviour
 
             ps.Play();
             FindObjectOfType<AudioManager1>().Play("ScoreSuccess");
-            FindObjectOfType<AudioManager1>().Play("Net");
         }
     }
 }

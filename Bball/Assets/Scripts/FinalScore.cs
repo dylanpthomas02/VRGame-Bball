@@ -5,13 +5,11 @@ using TMPro;
 
 public class FinalScore : MonoBehaviour
 {
+    public static FinalScore finalScore;
     public TextMeshProUGUI finalScoreText;
 
-    void Update()
+    public void FinalScoreUI()
     {
-        if (finalScoreText.gameObject.activeSelf)
-        {
-            finalScoreText.text = ScoreManager.instance.scoreText.text;
-        }
+        finalScoreText.text = ScoreManager.instance.playerScore.ToString();
     }
 }

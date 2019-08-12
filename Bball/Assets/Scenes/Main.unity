@@ -503,14 +503,14 @@ MonoBehaviour:
   sounds:
   - soundName: Background
     clip: {fileID: 8300000, guid: f6351ca95b1332147841e28fb6d3f234, type: 3}
-    volume: 0.15
+    volume: 0.1
     pitch: 1
     loop: 1
     source: {fileID: 0}
     spatialBlend: 0
   - soundName: ScoreSuccess
     clip: {fileID: 8300000, guid: c5cb8908e3c245247aeca4a3ab9a1772, type: 3}
-    volume: 1
+    volume: 0.6
     pitch: 1
     loop: 0
     source: {fileID: 0}
@@ -529,8 +529,15 @@ MonoBehaviour:
     loop: 0
     source: {fileID: 0}
     spatialBlend: 1
-  - soundName: Net
-    clip: {fileID: 8300000, guid: 78e68cea3bba29846a03137396f7db65, type: 3}
+  - soundName: GameEnd
+    clip: {fileID: 8300000, guid: c5cb8908e3c245247aeca4a3ab9a1772, type: 3}
+    volume: 1
+    pitch: 2
+    loop: 0
+    source: {fileID: 0}
+    spatialBlend: 0.5
+  - soundName: GameStart
+    clip: {fileID: 8300000, guid: d855283481663a6448cd35813048b3e6, type: 3}
     volume: 1
     pitch: 1
     loop: 0
@@ -782,7 +789,7 @@ GameObject:
   - component: {fileID: 1558358753}
   - component: {fileID: 1558358752}
   m_Layer: 5
-  m_Name: Pointer_Cursor
+  m_Name: GazeIcon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -800,6 +807,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30530ad0e40d0a64ea26d753ee4996ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gazeIcon: {fileID: 1558358755}
   hideByDefault: 1
   showTimeoutPeriod: 1
   hideTimeoutPeriod: 0.1

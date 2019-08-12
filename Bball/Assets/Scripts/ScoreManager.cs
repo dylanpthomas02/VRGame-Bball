@@ -10,9 +10,10 @@ public class ScoreManager : MonoBehaviour
     public Transform player;
     public TextMeshProUGUI scoreText;
     public TextMeshProUGUI popupText;
+    public TextMeshProUGUI finalScoreText;
     public Animator popupAnim;
 
-    public static int playerScore;
+    public int playerScore { get; set; }
 
     private int popupScore;
 
@@ -40,6 +41,11 @@ public class ScoreManager : MonoBehaviour
         {
             UpdateScoreUI();
         }
+    }
+
+    public void FinalScore()
+    {
+        finalScoreText.text = playerScore.ToString();
     }
 
     public void ResetScore()
