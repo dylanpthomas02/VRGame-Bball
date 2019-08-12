@@ -8,12 +8,12 @@ public class ScoreManager : MonoBehaviour
     public static ScoreManager instance;
 
     public Transform player;
-
     public TextMeshProUGUI scoreText;
     public TextMeshProUGUI popupText;
-    public Animator anim;
+    public Animator popupAnim;
 
     public static int playerScore;
+
     private int popupScore;
 
     private void Awake()
@@ -53,11 +53,6 @@ public class ScoreManager : MonoBehaviour
     {
         popupText.text = "+" + popupScore.ToString();
         scoreText.text = playerScore.ToString();
-
-        // TODO: create popup score animation
-        anim.SetTrigger("popup");
-        //new WaitForSeconds(1f);
-        //anim.SetBool("popup", false);
-
+        popupAnim.SetTrigger("popup");
     }
 }

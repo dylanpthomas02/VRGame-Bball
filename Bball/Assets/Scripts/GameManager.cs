@@ -9,8 +9,8 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-    //TODO: Method to instantiate basketball racks. And reset them.
-
+    // TODO: Reset level setup without reloading the level. 
+    // Spawn racks, reset score and timer, etc.
     public static GameManager instance = null;
 
     public TextMeshProUGUI messageText;
@@ -21,7 +21,6 @@ public class GameManager : MonoBehaviour
     public GameObject GameCompleteMenu;
 
     public int balls = 0;
-    public Animator countdownAnim;
 
     List<Ball> ballList = new List<Ball>();
 
@@ -49,6 +48,7 @@ public class GameManager : MonoBehaviour
         else
         {
             Destroy(this);
+            return;
         }
 
         GameCompleteMenu.SetActive(false);
@@ -73,7 +73,7 @@ public class GameManager : MonoBehaviour
 
     void DisableHandControl()
     {
-        // Good way to disable grab functionality.
+        // Disable grab functionality before game start by making grabBegin higher than is possible.
         lController.GetComponent<DistanceGrabber>().grabBegin = 1.1f;
         rController.GetComponent<DistanceGrabber>().grabBegin = 1.1f;
     }
@@ -120,7 +120,7 @@ public class GameManager : MonoBehaviour
 
         messageText.text = "GO!!";
         EnableHandControl();
-        //FindObjectOfType<AudioManager1>().Play("GameStart");
+        FindObjectOfType<AudioManager1>().Play("GameStart");
 
         yield return new WaitForSeconds(1f);
     }
@@ -143,6 +143,7 @@ public class GameManager : MonoBehaviour
 
         messageText.text = "Game Over!";
         GameCompleteMenu.SetActive(true);
+        FindObjectOfType<AudioManager1>().Play("GameEnd");
 
         yield return null;
     }
@@ -155,10 +156,9 @@ public class GameManager : MonoBehaviour
 
     public void ResetLevel()
     {
-        //TODO: Don't reload scene, just reset everything.
+        //TODO: Don't reload scene, reset it.
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
 
-        // TODO: Need a method to reset basketball racks
         //Timer.instance.ResetTimer();
         //ScoreManager.instance.ResetScore();
     }
