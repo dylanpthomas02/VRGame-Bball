@@ -131,7 +131,7 @@ public class GameManager : MonoBehaviour
         Timer.instance.isPlaying = true;
         messageText.text = string.Empty;
 
-        while (balls > 6 && Timer.instance.currentTime > 0)
+        while (balls > 0 && Timer.instance.currentTime > 0)
         {
             yield return null;
         }
