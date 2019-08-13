@@ -81,14 +81,14 @@ public class GameManager : MonoBehaviour
     void EnableHandControl()
     {
         lController.GetComponent<DistanceGrabber>().grabBegin = 0.3f;
-        rController.GetComponent<DistanceGrabber>().grabBegin = 0.3f;
+        rController.GetComponent<DistanceGrabber>().grabBegin = 0.8f;
     }
 
     void CheckForPause()
     {
         if (OVRInput.GetDown(OVRInput.Button.Start))
         {
-            PauseMenu.transform.position = player.transform.position + new Vector3(2, 1.5f, 0);
+            PauseMenu.transform.position = player.transform.position + new Vector3(2, 1f, 0);
             PauseMenu.transform.rotation = player.transform.rotation;
             gamePaused = !gamePaused;
             PauseMenu.SetActive(gamePaused);
