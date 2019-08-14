@@ -8,8 +8,8 @@ public class Timer : MonoBehaviour
     public TextMeshProUGUI timerText;
     [SerializeField]
     private float startTime = 60;
-    public float currentTime = 0;
-    public bool isPlaying = false;
+    [HideInInspector] public bool isPlaying = false;
+    [HideInInspector] public float currentTime = 0;
 
     private void Awake()
     {

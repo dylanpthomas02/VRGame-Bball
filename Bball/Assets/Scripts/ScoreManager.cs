@@ -20,10 +20,13 @@ public class ScoreManager : MonoBehaviour
     private void Awake()
     {
         if (instance == null)
+        {
             instance = this;
+        }
         else
+        {
             Destroy(this);
-            return;
+        }
     }
 
     void Start()

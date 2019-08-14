@@ -14,9 +14,11 @@ public class GameManager : MonoBehaviour
     public static GameManager instance = null;
 
     public TextMeshProUGUI messageText;
-
+    public GameObject cameraRig;
     public GameObject StartMenu;
     public GameObject GameCompleteMenu;
+    public GameObject PauseMenu;
+    public Vector3 menuOffset;
 
     public int balls = 0;
 
@@ -27,6 +29,7 @@ public class GameManager : MonoBehaviour
 
     public GameObject lController;
     public GameObject rController;
+    bool isPaused = false;
 
     void Awake()
     {
@@ -49,13 +52,33 @@ public class GameManager : MonoBehaviour
         }
 
         GameCompleteMenu.SetActive(false);
-        
+        PauseMenu.SetActive(false);
     }
 
     private void Start()
     {
         m_StartWait = new WaitForSeconds(m_StartDelay);
         DisableHandControl();
+    }
+
+    private void Update()
+    {
+        CheckForPause();
+    }
+
+    void CheckForPause()
+    {
+        if (OVRInput.GetDown(OVRInput.Button.Start))
+        {
+            isPaused = !isPaused;
+            PauseMenu.SetActive(isPaused);
+            PauseMenu.transform.position = cameraRig.transform.TransformPoint(menuOffset);
+            Vector3 newEulerRot = cameraRig.transform.rotation.eulerAngles;
+            newEulerRot.x = 0.0f;
+            newEulerRot.z = 0.0f;
+            PauseMenu.transform.eulerAngles = newEulerRot;
+            Pause(isPaused);
+        }
     }
 
     public void StartGameButton()
@@ -82,15 +105,6 @@ public class GameManager : MonoBehaviour
         yield return StartCoroutine(RoundStarting());
         yield return StartCoroutine(RoundPlaying());
         yield return StartCoroutine(RoundEnding());
-
-        //if (Timer.instance.currentTime <= 0 || balls <= 6)
-        //{
-        //    Debug.Log("GameLoop finished");
-        //}
-        //else
-        //{
-        //    StartCoroutine(GameLoop());
-        //}
     }
 
     private IEnumerator RoundStarting()
@@ -124,7 +138,12 @@ public class GameManager : MonoBehaviour
         Timer.instance.isPlaying = false;
 
         ScoreManager.instance.FinalScore();
-        //GameCompleteMenu.transform.position = player.transform.position + new Vector3(0f, 1f, -2f);
+
+        GameCompleteMenu.transform.position = cameraRig.transform.TransformPoint(menuOffset);
+        Vector3 newEulerRot = cameraRig.transform.rotation.eulerAngles;
+        newEulerRot.x = 0.0f;
+        newEulerRot.z = 0.0f;
+        GameCompleteMenu.transform.eulerAngles = newEulerRot;
         GameCompleteMenu.SetActive(true);
         FindObjectOfType<AudioManager1>().Play("GameEnd");
 
