@@ -99,7 +99,7 @@ public class GameManager : MonoBehaviour
         messageText.text = "Get Ready!";
 
         yield return m_StartWait;
-
+        PlayerScript.instance.gameStarted = true;
         messageText.text = "GO!!";
         EnableHandControl();
         FindObjectOfType<AudioManager1>().Play("GameStart");
@@ -123,7 +123,6 @@ public class GameManager : MonoBehaviour
         DisableHandControl();
         Timer.instance.isPlaying = false;
 
-        messageText.text = "Game Over!";
         ScoreManager.instance.FinalScore();
         //GameCompleteMenu.transform.position = player.transform.position + new Vector3(0f, 1f, -2f);
         GameCompleteMenu.SetActive(true);

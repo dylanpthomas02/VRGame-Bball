@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class PlayerScript : MonoBehaviour
 {
+    public static PlayerScript instance;
+
     public Transform[] rackPositions;
     int index = 0;
 
@@ -14,6 +16,19 @@ public class PlayerScript : MonoBehaviour
 
     Vector3 offset = new Vector3(0, 1, -2f);
     bool gamePaused = false;
+    public bool gameStarted = false;
+
+    private void Awake()
+    {
+        if (instance == null)
+        {
+            instance = this;
+        }
+        else
+        {
+            Destroy(this.gameObject);
+        }
+    }
 
     void Start()
     {
@@ -39,7 +54,7 @@ public class PlayerScript : MonoBehaviour
         CheckForPause();
 
         // TODO: refactor
-        if (index == 0)
+        if (index == 0 && gameStarted)
         {
             if (OVRInput.GetDown(up))
             {
@@ -52,7 +67,7 @@ public class PlayerScript : MonoBehaviour
                 SetPosAndRot();
             }
         }
-        else if (index > 0 && index < rackPositions.Length - 1)
+        else if (index > 0 && index < rackPositions.Length - 1 && gameStarted)
         {
             if (OVRInput.GetDown(up))
             {
@@ -65,7 +80,7 @@ public class PlayerScript : MonoBehaviour
                 SetPosAndRot();
             }
         }
-        else
+        else if (gameStarted)
         {
             if (OVRInput.GetDown(up))
             {
