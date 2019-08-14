@@ -1,9 +1,5 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.UI;
+﻿using UnityEngine;
 using TMPro;
-using System;
 
 public class Timer : MonoBehaviour
 {
@@ -59,6 +55,6 @@ public class Timer : MonoBehaviour
 
     public void SetUI()
     {
-        timerText.text = currentTime.ToString("F0");
+        timerText.text = currentTime.ToString("F1");
     }
 }

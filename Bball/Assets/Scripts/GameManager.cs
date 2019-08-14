@@ -15,9 +15,7 @@ public class GameManager : MonoBehaviour
 
     public TextMeshProUGUI messageText;
 
-    public GameObject player;
     public GameObject StartMenu;
-    public GameObject PauseMenu;
     public GameObject GameCompleteMenu;
 
     public int balls = 0;
@@ -26,7 +24,6 @@ public class GameManager : MonoBehaviour
 
     private float m_StartDelay = 3f;
     private WaitForSeconds m_StartWait;
-    bool gamePaused = false;
 
     public GameObject lController;
     public GameObject rController;
@@ -52,18 +49,13 @@ public class GameManager : MonoBehaviour
         }
 
         GameCompleteMenu.SetActive(false);
-        PauseMenu.SetActive(false);
+        
     }
 
     private void Start()
     {
         m_StartWait = new WaitForSeconds(m_StartDelay);
         DisableHandControl();
-    }
-
-    void Update()
-    {
-        CheckForPause();
     }
 
     public void StartGameButton()
@@ -84,17 +76,6 @@ public class GameManager : MonoBehaviour
         rController.GetComponent<DistanceGrabber>().grabBegin = 0.8f;
     }
 
-    void CheckForPause()
-    {
-        if (OVRInput.GetDown(OVRInput.Button.Start))
-        {
-            PauseMenu.transform.position = player.transform.position + new Vector3(2, 1f, 0);
-            PauseMenu.transform.rotation = player.transform.rotation;
-            gamePaused = !gamePaused;
-            PauseMenu.SetActive(gamePaused);
-            Pause(gamePaused);
-        }
-    }
 
     private IEnumerator GameLoop()
     {
@@ -144,6 +125,7 @@ public class GameManager : MonoBehaviour
 
         messageText.text = "Game Over!";
         ScoreManager.instance.FinalScore();
+        //GameCompleteMenu.transform.position = player.transform.position + new Vector3(0f, 1f, -2f);
         GameCompleteMenu.SetActive(true);
         FindObjectOfType<AudioManager1>().Play("GameEnd");
 

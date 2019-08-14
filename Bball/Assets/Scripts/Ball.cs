@@ -1,15 +1,9 @@
-﻿using OculusSampleFramework;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class Ball : MonoBehaviour
 {
     public int scoreAmount;
     bool hit = false;
-
-    private void Awake()
-    {
-        //transform.hideFlags = HideFlags.None;
-    }
 
     private void OnCollisionEnter(Collision collision)
     {

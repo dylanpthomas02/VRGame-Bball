@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class AddScore : MonoBehaviour
 {
-    //TODO: setup particle system for successful shot
     public ParticleSystem ps;
 
     private void OnTriggerEnter(Collider other)

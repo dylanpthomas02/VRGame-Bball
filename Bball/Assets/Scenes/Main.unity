@@ -503,7 +503,7 @@ MonoBehaviour:
   sounds:
   - soundName: Background
     clip: {fileID: 8300000, guid: f6351ca95b1332147841e28fb6d3f234, type: 3}
-    volume: 0.1
+    volume: 0.08
     pitch: 1
     loop: 1
     source: {fileID: 0}

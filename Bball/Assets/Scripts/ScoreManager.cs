@@ -15,7 +15,7 @@ public class ScoreManager : MonoBehaviour
 
     public int playerScore { get; set; }
 
-    private int popupScore;
+    private int popupScore = 0;
 
     private void Awake()
     {
@@ -29,16 +29,15 @@ public class ScoreManager : MonoBehaviour
     void Start()
     {
         playerScore = 0;
-        popupScore = 0;
-        UpdateScoreUI();
+        scoreText.text = playerScore.ToString();
     }
 
     public void AddScore(int ballScore)
     {
-        playerScore += ballScore;
-        popupScore = ballScore;
-        if (popupScore > 0)
+        if (ballScore > 0)
         {
+            playerScore += ballScore;
+            popupScore = ballScore;
             UpdateScoreUI();
         }
     }
