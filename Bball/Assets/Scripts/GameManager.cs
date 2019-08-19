@@ -20,6 +20,8 @@ public class GameManager : MonoBehaviour
     public GameObject PauseMenu;
     public Vector3 menuOffset;
 
+    public GameObject pointer;
+
     public int balls = 0;
 
     List<Ball> ballList = new List<Ball>();
@@ -71,6 +73,7 @@ public class GameManager : MonoBehaviour
         if (OVRInput.GetDown(OVRInput.Button.Start))
         {
             isPaused = !isPaused;
+            pointer.SetActive(isPaused);
             PauseMenu.SetActive(isPaused);
             PauseMenu.transform.position = cameraRig.transform.TransformPoint(menuOffset);
             Vector3 newEulerRot = cameraRig.transform.rotation.eulerAngles;
@@ -125,6 +128,7 @@ public class GameManager : MonoBehaviour
     {
         Timer.instance.isPlaying = true;
         messageText.text = string.Empty;
+        pointer.SetActive(false);
 
         while (balls > 0 && Timer.instance.currentTime > 0)
         {
@@ -145,6 +149,7 @@ public class GameManager : MonoBehaviour
         newEulerRot.z = 0.0f;
         GameCompleteMenu.transform.eulerAngles = newEulerRot;
         GameCompleteMenu.SetActive(true);
+        pointer.SetActive(true);
         FindObjectOfType<AudioManager1>().Play("GameEnd");
 
         yield return null;
