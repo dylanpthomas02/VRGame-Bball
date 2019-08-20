@@ -1,9 +1,7 @@
 ﻿using OculusSampleFramework;
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
-using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -102,7 +100,6 @@ public class GameManager : MonoBehaviour
         rController.GetComponent<DistanceGrabber>().grabBegin = 0.8f;
     }
 
-
     private IEnumerator GameLoop()
     {
         yield return StartCoroutine(RoundStarting());
@@ -164,6 +161,7 @@ public class GameManager : MonoBehaviour
     public void ResetLevel()
     {
         //TODO: Don't reload scene, reset it.
+        StopAllCoroutines();
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
 
         //Timer.instance.ResetTimer();
