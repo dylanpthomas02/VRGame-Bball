@@ -1,8 +1,8 @@
 # VRGame-Bball
 
 # Description
-Basketball - 3 point contest game.
-All models designed by me in Blender 2.8
+Basketball - 3 point contest game in a neon-lit setting.
+All models designed by me in Blender 2.80.
 
 # Gameplay
 ![](bball.gif)
